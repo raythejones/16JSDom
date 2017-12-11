@@ -3,7 +3,7 @@ var otherlist = document.getElementById("theotherlist"); //Ordered list element
 var header = document.getElementById("h"); //Header element
 var elements = document.getElementsByTagName("li");//Array of list elements
 var elementsCtr = 8; //list counter
-var fibctr = 0;
+var fibCtr = 0;
 
 /* Adds a new list item to the ordered list */
 var addElementToList = function(){
@@ -23,8 +23,8 @@ var addElementToList = function(){
 var addElementToOtherList = function(){
     
     var newElement = document.createElement("li"); //create new list element
-    newElement.innerHTML = fibonacci(fibctr); //add text to element
-    fibctr++; //increment list counter
+    newElement.innerHTML = fibonacci(fibCtr); //add text to element
+    fibCtr++; //increment list counter
     otherlist.appendChild(newElement); //add list element to ordered list
 
     //add event listener to newly created list elements
@@ -56,6 +56,15 @@ var fibonacci = function(n) {
     }
     return fibonacci(n-1) + fibonacci(n-2);
 }
+
+var changeColor = function(){
+    var colors = ['green', 'red', 'blue', 'yellow', 'orange']
+    var randColor = Math.floor(Math.random()*5);
+    this.setAttribute('class', colors[randColor]);
+    console.log(colors[randColor]);
+}
+
+document.getElementById("h").addEventListener('mouseover', changeColor);
 
 //add event listener to button
 b.addEventListener('click', addElementToList);
