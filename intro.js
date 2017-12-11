@@ -1,7 +1,9 @@
 var list = document.getElementById("thelist"); //Ordered list element
+var otherlist = document.getElementById("theotherlist"); //Ordered list element
 var header = document.getElementById("h"); //Header element
 var elements = document.getElementsByTagName("li");//Array of list elements
-var elementsCtr = 8 //list counter
+var elementsCtr = 8; //list counter
+var fibctr = 0;
 
 /* Adds a new list item to the ordered list */
 var addElementToList = function(){
@@ -10,6 +12,20 @@ var addElementToList = function(){
     newElement.innerHTML = "Anotha element: " + elementsCtr; //add text to element
     elementsCtr++; //increment list counter
     list.appendChild(newElement); //add list element to ordered list
+
+    //add event listener to newly created list elements
+    newElement.addEventListener('mouseover', changeHead); 
+    newElement.addEventListener('mouseout', revertHead);
+    newElement.addEventListener('click', removeElement);
+};
+
+/* Adds a new list item to the ordered list */
+var addElementToOtherList = function(){
+    
+    var newElement = document.createElement("li"); //create new list element
+    newElement.innerHTML = fibonacci(fibctr); //add text to element
+    fibctr++; //increment list counter
+    otherlist.appendChild(newElement); //add list element to ordered list
 
     //add event listener to newly created list elements
     newElement.addEventListener('mouseover', changeHead); 
@@ -32,8 +48,18 @@ var removeElement = function(){
     this.remove();
 };
 
+var fibonacci = function(n) {
+    if (n == 0) {
+	return 0;
+    } else if (n == 1) {
+	return 1;
+    }
+    return fibonacci(n-1) + fibonacci(n-2);
+}
+
 //add event listener to button
 b.addEventListener('click', addElementToList);
+b2.addEventListener('click', addElementToOtherList);
 
 //add event listeners to pre written list items
 for(i = 0; i < elements.length; i++){
